@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/five_dp">
+
+    <com.amit.iv.CircularImageView
+        android:id="@+id/ivEmpImage"
+        android:layout_width="@dimen/eighty_dp"
+        android:layout_height="@dimen/eighty_dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/empImgViewBarrier"
+        android:layout_width="@dimen/zero_dp"
+        android:layout_height="@dimen/zero_dp"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="ivEmpImage" />
+
+    <TextView
+        android:id="@+id/tvEmployeeName"
+        android:layout_width="@dimen/zero_dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size_18"
+        app:layout_constraintBottom_toTopOf="@id/tvDesignation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/empImgViewBarrier"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDesignation"
+        android:layout_width="@dimen/zero_dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/five_dp"
+        android:textSize="@dimen/font_size_14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/empImgViewBarrier"
+        app:layout_constraintTop_toBottomOf="@id/tvEmployeeName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

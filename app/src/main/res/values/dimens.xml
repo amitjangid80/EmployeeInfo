@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- dp dimensions -->
+    <dimen name="zero_dp">0dp</dimen>
+    <dimen name="one_dp">1dp</dimen>
+    <dimen name="two_dp">2dp</dimen>
+    <dimen name="three_dp">3dp</dimen>
+    <dimen name="five_dp">5dp</dimen>
+    <dimen name="eight_dp">8dp</dimen>
+    <dimen name="ten_dp">10dp</dimen>
+    <dimen name="twelve_dp">12dp</dimen>
+    <dimen name="fifteen_dp">15dp</dimen>
+    <dimen name="twenty_dp">20dp</dimen>
+    <dimen name="twenty_four_dp">24dp</dimen>
+    <dimen name="thirty_six_dp">36dp</dimen>
+    <dimen name="forty_dp">40dp</dimen>
+    <dimen name="eighty_dp">80dp</dimen>
+
+    <!-- Font size dimensions -->
+    <dimen name="font_size_13">13sp</dimen>
+    <dimen name="font_size_14">14sp</dimen>
+    <dimen name="font_size_15">15sp</dimen>
+    <dimen name="font_size_16">16sp</dimen>
+    <dimen name="font_size_18">18sp</dimen>
+    <dimen name="font_size_20">20sp</dimen>
+    <dimen name="font_size_28">28sp</dimen>
+
+    <dimen name="design_fab_image_size" tools:override="true">48dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+</resources>
