@@ -2,17 +2,37 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.amit.employeeinfo">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name=".EmpInfoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EmployeeInfo">
-        <activity android:name=".views.activities.PersonalInfoActivity"></activity>
-        <activity android:name=".views.activities.BaseActivity" />
-        <activity android:name=".views.activities.MainActivity">
+        <activity
+            android:name=".views.activities.EmployeeInfoActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".views.activities.BankInfoActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".views.activities.PersonalInfoActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".views.activities.BaseActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".views.activities.MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,5 +40,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

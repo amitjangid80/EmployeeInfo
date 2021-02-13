@@ -18,7 +18,9 @@ public class Employee
     private String branchName;
     private String accountNo;
     private String ifscCode;
-    private byte[] empImage;
+    private String empImage;
+    private String entryDate;
+    private String updateDate;
 
     public int getCode()
     {
@@ -170,13 +172,33 @@ public class Employee
         this.ifscCode = ifscCode;
     }
 
-    public byte[] getEmpImage()
+    public String getEmpImage()
     {
         return empImage;
     }
 
-    public void setEmpImage(byte[] empImage)
+    public void setEmpImage(String empImage)
     {
         this.empImage = empImage;
+    }
+
+    public String getEntryDate()
+    {
+        return entryDate;
+    }
+
+    public void setEntryDate(String entryDate)
+    {
+        this.entryDate = entryDate;
+    }
+
+    public String getUpdateDate()
+    {
+        return updateDate;
+    }
+
+    public void setUpdateDate(String updateDate)
+    {
+        this.updateDate = updateDate;
     }
 }

@@ -3,6 +3,8 @@ package com.amit.employeeinfo.views.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +14,7 @@ import android.util.Log;
 import com.amit.dialog.PromptDialogBox;
 import com.amit.employeeinfo.R;
 import com.amit.employeeinfo.data.LocalDbHelper;
+import com.amit.permission.PermissionHelper;
 
 public abstract class BaseActivity extends AppCompatActivity
 {
@@ -25,6 +28,12 @@ public abstract class BaseActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         localDbHelper = new LocalDbHelper(BaseActivity.this);
+
+        PermissionHelper.Companion.requestPermission(BaseActivity.this, 121,
+                new String[]{
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                });
     }
 
     public static void setToolbar(AppCompatActivity activity, String title)
@@ -65,6 +74,33 @@ public abstract class BaseActivity extends AppCompatActivity
                         .setTitleText(context.getResources().getString(R.string.success))
                         .setContentText(message)
                         .setPositiveListener(context.getResources().getString(R.string.ok), PromptDialogBox::dismiss);
+
+                promptDialogBox.setCancelable(false);
+                promptDialogBox.show();
+            });
+        }
+        catch (Exception e)
+        {
+            handleException(TAG, "showErrorDialog: exception while showing error dialog", e);
+        }
+    }
+
+    public static void showSuccessDialogWithExit(Context context, String message)
+    {
+        try
+        {
+            new Handler(Looper.getMainLooper()).post(() ->
+            {
+                PromptDialogBox promptDialogBox = new PromptDialogBox(context)
+                        .setDialogType(PromptDialogBox.DIALOG_TYPE_SUCCESS)
+                        .setAnimationEnable(true)
+                        .setTitleText(context.getResources().getString(R.string.success))
+                        .setContentText(message)
+                        .setPositiveListener(context.getResources().getString(R.string.ok), promptDialogBox1 ->
+                        {
+                            promptDialogBox1.dismiss();
+                            new Handler(Looper.getMainLooper()).postDelayed(((Activity) context)::finish, 500);
+                        });
 
                 promptDialogBox.setCancelable(false);
                 promptDialogBox.show();

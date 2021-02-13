@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/csEmployee"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/five_dp">
@@ -9,6 +11,9 @@
         android:id="@+id/ivEmpImage"
         android:layout_width="@dimen/eighty_dp"
         android:layout_height="@dimen/eighty_dp"
+        android:layout_marginEnd="@dimen/ten_dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/empImgViewBarrier"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,20 +28,36 @@
         android:id="@+id/tvEmployeeName"
         android:layout_width="@dimen/zero_dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/black_shade"
         android:textSize="@dimen/font_size_18"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/tvDesignation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/empImgViewBarrier"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Amit Jangid" />
 
     <TextView
         android:id="@+id/tvDesignation"
         android:layout_width="@dimen/zero_dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/five_dp"
+        android:layout_marginTop="@dimen/three_dp"
+        android:layout_marginEnd="@dimen/five_dp"
+        android:textColor="@color/black_shade"
+        android:textSize="@dimen/font_size_14"
+        app:layout_constraintStart_toEndOf="@id/empImgViewBarrier"
+        app:layout_constraintTop_toBottomOf="@id/tvEmployeeName"
+        tools:text="Android Developer" />
+
+    <TextView
+        android:id="@+id/tvWorkExperience"
+        android:layout_width="@dimen/zero_dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/five_dp"
         android:textSize="@dimen/font_size_14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/empImgViewBarrier"
-        app:layout_constraintTop_toBottomOf="@id/tvEmployeeName" />
+        app:layout_constraintTop_toBottomOf="@id/tvDesignation"
+        tools:text="@string/work_experience" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

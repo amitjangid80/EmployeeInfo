@@ -13,10 +13,6 @@ android {
         versionName "1.0"
     }
 
-    buildFeatures {
-        viewBinding true
-    }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -37,4 +33,9 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     implementation 'com.github.amitjangid80:multiutillib:v1.7.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    // butter knife library
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 }

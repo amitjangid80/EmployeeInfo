@@ -4,84 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.activities.PersonalInfoActivity">
+    tools:context=".views.activities.BankInfoActivity">
 
     <include
         android:id="@+id/includeToolbar"
         layout="@layout/toolbar" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtFirstName"
+        android:id="@+id/txtBankName"
         android:layout_width="@dimen/zero_dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/ten_dp"
         android:layout_marginTop="@dimen/ten_dp"
         android:layout_marginEnd="@dimen/ten_dp"
-        app:layout_constraintBottom_toTopOf="@id/txtLastName"
+        app:layout_constraintBottom_toTopOf="@id/spinnerBranchName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/includeToolbar">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtFirstName"
+            android:id="@+id/edtBankName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/first_name"
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColor="@color/black_shade"
-            android:textColorHint="@color/gray_500"
-            android:textSize="@dimen/font_size_16" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtLastName"
-        android:layout_width="@dimen/zero_dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/ten_dp"
-        android:layout_marginTop="@dimen/ten_dp"
-        android:layout_marginEnd="@dimen/ten_dp"
-        app:layout_constraintBottom_toTopOf="@id/txtPhoneNo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtFirstName">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtLastName"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/last_name"
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColor="@color/black_shade"
-            android:textColorHint="@color/gray_500"
-            android:textSize="@dimen/font_size_16" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtPhoneNo"
-        android:layout_width="@dimen/zero_dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/ten_dp"
-        android:layout_marginTop="@dimen/ten_dp"
-        android:layout_marginEnd="@dimen/ten_dp"
-        app:layout_constraintBottom_toTopOf="@id/tvGender"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtFirstName">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtPhoneNo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/phone_no"
+            android:hint="@string/bank_name"
             android:imeOptions="actionDone"
-            android:inputType="phone"
-            android:maxLength="10"
+            android:inputType="text"
             android:maxLines="1"
             android:textColor="@color/black_shade"
             android:textColorHint="@color/gray_500"
@@ -89,76 +36,94 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/tvGender"
-        android:layout_width="@dimen/zero_dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/fifteen_dp"
-        android:layout_marginTop="@dimen/ten_dp"
-        android:layout_marginEnd="@dimen/ten_dp"
-        android:text="@string/gender"
-        app:layout_constraintBottom_toTopOf="@id/rgGender"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtPhoneNo" />
-
-    <RadioGroup
-        android:id="@+id/rgGender"
-        android:layout_width="@dimen/zero_dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/eight_dp"
-        android:layout_marginEnd="@dimen/eight_dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvGender">
-
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/rbMale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/five_dp"
-            android:text="@string/gender_male" />
-
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/rbFemale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/five_dp"
-            android:text="@string/gender_female" />
-
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/rbOther"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/gender_other" />
-
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/tvSelectDOB"
+    <com.amit.views.ASpinner
+        android:id="@+id/spinnerBranchName"
         android:layout_width="@dimen/zero_dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/ten_dp"
         android:layout_marginTop="@dimen/ten_dp"
         android:layout_marginEnd="@dimen/ten_dp"
-        android:background="@drawable/black_rounded_border"
-        android:drawablePadding="@dimen/five_dp"
-        android:onClick="selectDob"
-        android:padding="@dimen/ten_dp"
-        android:text="@string/dob"
-        app:drawableEndCompat="@drawable/ic_calendar_black_24dp"
+        android:hint="@string/branch_name"
+        android:textColor="@color/black_shade"
+        app:layout_constraintBottom_toTopOf="@id/txtAccountNo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rgGender" />
+        app:layout_constraintTop_toBottomOf="@id/txtBankName"
+        app:spinner_dialog_icon_tint="@color/purple_500"
+        app:spinner_dialog_title="@string/branch_name" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtAccountNo"
+        android:layout_width="@dimen/zero_dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/ten_dp"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:layout_marginEnd="@dimen/ten_dp"
+        app:layout_constraintBottom_toTopOf="@id/txtIFSCCode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerBranchName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtAccountNo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/account_no"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLines="1"
+            android:textColor="@color/black_shade"
+            android:textColorHint="@color/gray_500"
+            android:textSize="@dimen/font_size_16" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtIFSCCode"
+        android:layout_width="@dimen/zero_dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/ten_dp"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:layout_marginEnd="@dimen/ten_dp"
+        app:layout_constraintBottom_toTopOf="@id/ivCaptureEmpImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtAccountNo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtIFSCCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/ifsc_code"
+            android:imeOptions="actionNext"
+            android:inputType="text|phone"
+            android:maxLines="1"
+            android:textColor="@color/black_shade"
+            android:textColorHint="@color/gray_500"
+            android:textSize="@dimen/font_size_16" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivCaptureEmpImage"
+        android:layout_width="@dimen/hundred_twenty_dp"
+        android:layout_height="@dimen/hundred_twenty_dp"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:background="@drawable/black_rounded_border"
+        android:onClick="captureEmpImage"
+        android:padding="@dimen/three_dp"
+        android:src="@drawable/add_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtIFSCCode" />
 
     <Button
-        android:id="@+id/btnSavePersonalInfo"
+        android:id="@+id/btnSaveBankInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="@color/colorPrimary"
-        android:onClick="savePersonalInfo"
+        android:onClick="saveBankInfo"
         android:text="@string/submit"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

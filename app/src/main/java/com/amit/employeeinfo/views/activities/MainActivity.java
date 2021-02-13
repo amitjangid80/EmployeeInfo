@@ -1,40 +1,53 @@
 package com.amit.employeeinfo.views.activities;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amit.employeeinfo.R;
-import com.amit.employeeinfo.databinding.ActivityMainBinding;
+import com.amit.employeeinfo.interfaces.OnEmployeeClickListener;
 import com.amit.employeeinfo.models.Employee;
+import com.amit.employeeinfo.utils.Constants;
 import com.amit.employeeinfo.views.adapters.EmployeeListAdapter;
 
 import java.util.ArrayList;
 
-// Created by AMIT JANGID on 13/02/21.
-public class MainActivity extends BaseActivity
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+@SuppressLint("NonConstantResourceId")
+public class MainActivity extends BaseActivity implements OnEmployeeClickListener
 {
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private ActivityMainBinding binding;
+    @BindView(R.id.rvEmployeesList)
+    public RecyclerView rvEmployeesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
+
+        ButterKnife.bind(this);
 
         // calling set toolbar method
-        setToolbar(MainActivity.this, getString(R.string.app_name));
+        setToolbar(MainActivity.this, getString(R.string.employees));
     }
 
     @Override
     protected void onResume()
     {
         super.onResume();
+
+        // calling get employee list method
+        getEmployeeList();
     }
 
     private void getEmployeeList()
@@ -42,17 +55,18 @@ public class MainActivity extends BaseActivity
         try
         {
             // calling get all employees method
-            ArrayList<Employee> employeesArrayList = localDbHelper.getAllEmployees();
+            ArrayList<Employee> employeesArrayList = localDbHelper.getEmployeeDetails(0);
 
             if (employeesArrayList != null && employeesArrayList.size() > 0)
             {
-                EmployeeListAdapter employeeListAdapter = new EmployeeListAdapter(employeesArrayList);
+                EmployeeListAdapter employeeListAdapter = new EmployeeListAdapter(
+                        MainActivity.this, employeesArrayList,
+                        MainActivity.this);
 
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this);
-                linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this, RecyclerView.VERTICAL, false);
 
-                binding.rvEmployeesList.setLayoutManager(linearLayoutManager);
-                binding.rvEmployeesList.setAdapter(employeeListAdapter);
+                rvEmployeesList.setLayoutManager(linearLayoutManager);
+                rvEmployeesList.setAdapter(employeeListAdapter);
             }
         }
         catch (Exception e)
@@ -63,6 +77,40 @@ public class MainActivity extends BaseActivity
 
     public void addNewEmployee(View view)
     {
+        // calling navigate to personal info activity method
+        navigateToPersonalInfoActivity(0, false);
+    }
 
+    private void navigateToPersonalInfoActivity(int code, boolean isUpdate)
+    {
+        Intent intent = new Intent(MainActivity.this, PersonalInfoActivity.class);
+        intent.putExtra(Constants.COLUMN_CODE, code);
+        intent.putExtra(Constants.IS_UPDATE_EXTRA, isUpdate);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        if (item.getItemId() == android.R.id.home)
+        {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        System.gc();
+    }
+
+    @Override
+    public void onEmployeeClick(Employee employee)
+    {
+        // calling navigate to personal info activity method
+        navigateToPersonalInfoActivity(employee.getCode(), true);
     }
 }

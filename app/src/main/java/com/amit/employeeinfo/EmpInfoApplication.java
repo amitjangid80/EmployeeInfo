@@ -59,6 +59,8 @@ public class EmpInfoApplication extends Application
                     .addColumnForTable(new DbColumn(Constants.COLUMN_ACCOUNT_NO, "text"))
                     .addColumnForTable(new DbColumn(Constants.COLUMN_IFSC_CODE, "text"))
                     .addColumnForTable(new DbColumn(Constants.COLUMN_EMP_IMAGE, "blob"))
+                    .addColumnForTable(new DbColumn(Constants.COLUMN_ENTRY_DATE, "text"))
+                    .addColumnForTable(new DbColumn(Constants.COLUMN_UPDATE_DATE, "text"))
                     .createTable(Constants.TABLE_EMPLOYEE_INFO);
         }
         catch (Exception e)

@@ -1,12 +1,65 @@
 <resources>
     <string name="app_name">EmployeeInfo</string>
 
+    <string name="employees">Employees</string>
+    <string name="bank_info">Bank Info</string>
+    <string name="personal_info">Personal Info</string>
+    <string name="employee_info">Employee Info</string>
+
     <string name="info">Info!!</string>
     <string name="error">Error!!</string>
     <string name="success">Success!!</string>
     <string name="warning">Warning!!</string>
 
+    <string name="submit">Submit</string>
+
+    <string name="dob">DOB</string>
+    <string name="gender">Gender</string>
+    <string name="gender_male">Male</string>
+    <string name="phone_no">Phone No</string>
+    <string name="gender_other">Other</string>
     <string name="last_name">Last Name</string>
+    <string name="gender_female">Female</string>
     <string name="first_name">First Name</string>
+
+    <string name="employee_no">Employee No</string>
+    <string name="designation">Designation</string>
+    <string name="account_type">Account Type</string>
+    <string name="employee_name">Employee Name</string>
+    <string name="work_experience">Work Experience</string>
+
+    <string name="bank_name">Bank Name</string>
+    <string name="ifsc_code">IFSC Code</string>
+    <string name="account_no">Account No</string>
+    <string name="branch_name">Branch Name</string>
+
+    <string name="saved_failed">Employee Details were not saved.</string>
+    <string name="saved_successfully">Employee Details were saved successfully.</string>
+
+    <string-array name="account_type_array">
+        <item>Savings Account</item>
+        <item>Current Account</item>
+    </string-array>
+
+    <string-array name="branch_name_array">
+        <item>Andheri</item>
+        <item>Kandivali</item>
+        <item>Mira Road</item>
+        <item>Thane</item>
+    </string-array>
+
+    <string-array name="work_experience_array">
+        <item>0 yr</item>
+        <item>1 yr</item>
+        <item>2 yrs</item>
+        <item>3 yrs</item>
+        <item>4 yrs</item>
+        <item>5 yrs</item>
+        <item>6 yrs</item>
+        <item>7 yrs</item>
+        <item>8 yrs</item>
+        <item>9 yrs</item>
+        <item>10 yrs</item>
+    </string-array>
 
 </resources>
