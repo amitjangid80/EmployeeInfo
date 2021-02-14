@@ -204,7 +204,7 @@ public class BankInfoActivity extends BaseActivity
                 return false;
             }
 
-            return false;
+            return true;
         }
         catch (Exception e)
         {

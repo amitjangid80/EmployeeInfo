@@ -203,7 +203,7 @@ public class EmployeeInfoActivity extends BaseActivity
                 return false;
             }
 
-            return false;
+            return true;
         }
         catch (Exception e)
         {

@@ -224,7 +224,7 @@ public class PersonalInfoActivity extends BaseActivity
                 return false;
             }
 
-            if (!rbMale.isChecked() || !rbFemale.isChecked() || !rbOther.isChecked())
+            if (!rbMale.isChecked() && !rbFemale.isChecked() && !rbOther.isChecked())
             {
                 showErrorDialog(PersonalInfoActivity.this, getResources().getString(R.string.select_gender));
                 return false;
@@ -236,7 +236,7 @@ public class PersonalInfoActivity extends BaseActivity
                 return false;
             }
 
-            return false;
+            return true;
         }
         catch (Exception e)
         {
