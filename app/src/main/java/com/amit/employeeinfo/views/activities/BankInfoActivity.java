@@ -3,8 +3,11 @@ package com.amit.employeeinfo.views.activities;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -84,20 +87,14 @@ public class BankInfoActivity extends BaseActivity
                 selectedBranchName = selectedItem;
                 spinnerBranchName.setText(selectedItem);
             });
+
+            // calling get employee details method
+            getEmployeeDetails();
         }
         catch (Exception e)
         {
             handleException(TAG, "exception while initializing activity", e);
         }
-    }
-
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-
-        // calling get employee details method
-        getEmployeeDetails();
     }
 
     private void getEmployeeDetails()
@@ -113,12 +110,17 @@ public class BankInfoActivity extends BaseActivity
                 {
                     mEmployee = employeesArrayList.get(0);
 
-                    selectedBranchName = mEmployee.getBranchName();
-                    spinnerBranchName.setText(mEmployee.getBranchName());
+                    if (mEmployee.getBankName() != null && mEmployee.getBankName().trim().length() > 0)
+                    {
+                        selectedImage = mEmployee.getEmpImage();
+                        selectedBranchName = mEmployee.getBranchName();
+                        spinnerBranchName.setText(mEmployee.getBranchName());
 
-                    edtBankName.setText(mEmployee.getBankName());
-                    edtIFSCCode.setText(mEmployee.getIfscCode());
-                    edtAccountNo.setText(mEmployee.getAccountNo());
+                        edtBankName.setText(mEmployee.getBankName());
+                        edtIFSCCode.setText(mEmployee.getIfscCode());
+                        edtAccountNo.setText(mEmployee.getAccountNo());
+                        ivCaptureEmpImage.setImageBitmap(BitmapFactory.decodeByteArray(selectedImage, 0, selectedImage.length));
+                    }
                 }
             }
         }
@@ -133,7 +135,6 @@ public class BankInfoActivity extends BaseActivity
         ImagePicker.Companion
                 .with(BankInfoActivity.this)
                 .compress(200)
-                .crop(200, 200)
                 .cropSquare()
                 .cameraOnly()
                 .start(IMAGE_REQUEST_CODE);
@@ -218,34 +219,43 @@ public class BankInfoActivity extends BaseActivity
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-        try
+        new Thread(() ->
         {
-            if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_REQUEST_CODE)
+            try
             {
-                if (data != null && data.getData() != null)
+                // calling show progress dialog method
+                showProgress(BankInfoActivity.this);
+
+                if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_REQUEST_CODE)
                 {
-                    Uri uri = data.getData();
-                    ivCaptureEmpImage.setImageURI(uri);
-
-                    int length, bufferSize = 1024;
-                    byte[] buffer = new byte[bufferSize];
-
-                    InputStream inputStream = getContentResolver().openInputStream(uri);
-                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
-                    while ((length = inputStream.read(buffer)) != -1)
+                    if (data != null && data.getData() != null)
                     {
-                        byteArrayOutputStream.write(buffer, 0, length);
-                    }
+                        Uri uri = data.getData();
+                        new Handler(Looper.getMainLooper()).post(() -> ivCaptureEmpImage.setImageURI(uri));
 
-                    selectedImage = byteArrayOutputStream.toByteArray();
+                        int length, bufferSize = 1024;
+                        byte[] buffer = new byte[bufferSize];
+
+                        InputStream inputStream = getContentResolver().openInputStream(uri);
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+                        while ((length = inputStream.read(buffer)) != -1)
+                        {
+                            byteArrayOutputStream.write(buffer, 0, length);
+                        }
+
+                        selectedImage = byteArrayOutputStream.toByteArray();
+                    }
                 }
+
+                // calling hide progress dialog method
+                hideProgress();
             }
-        }
-        catch (Exception e)
-        {
-            handleException(TAG, "exception while getting image in on activity result", e);
-        }
+            catch (Exception e)
+            {
+                handleException(TAG, "exception while getting image in on activity result", e);
+            }
+        }).start();
     }
 
     @Override

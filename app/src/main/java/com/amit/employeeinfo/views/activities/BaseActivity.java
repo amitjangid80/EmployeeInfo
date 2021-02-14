@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +22,7 @@ public abstract class BaseActivity extends AppCompatActivity
     private static final String TAG = BaseActivity.class.getSimpleName();
 
     public LocalDbHelper localDbHelper;
+    private static ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -132,6 +134,36 @@ public abstract class BaseActivity extends AppCompatActivity
         catch (Exception e)
         {
             handleException(TAG, "showErrorDialog: exception while showing error dialog", e);
+        }
+    }
+
+    public static void showProgress(Context context)
+    {
+        try
+        {
+            new Handler(Looper.getMainLooper()).post(() -> progressDialog = ProgressDialog.show(context, null, context.getResources().getString(R.string.please_wait), true, false));
+        }
+        catch (Exception e)
+        {
+            handleException(TAG, "exception while showing progress", e);
+        }
+    }
+
+    public static void hideProgress()
+    {
+        try
+        {
+            new Handler(Looper.getMainLooper()).post(() ->
+            {
+                if (progressDialog != null)
+                {
+                    progressDialog.dismiss();
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            handleException(TAG, "exception while hiding progress", e);
         }
     }
 }
