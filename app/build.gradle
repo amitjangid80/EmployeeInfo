@@ -32,7 +32,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
-    implementation 'com.github.amitjangid80:multiutillib:v1.7.4'
+    implementation 'com.github.amitjangid80:multiutillib:v1.7.43'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // butter knife library

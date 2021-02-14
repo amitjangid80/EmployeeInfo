@@ -135,6 +135,11 @@ public class EmployeeInfoActivity extends BaseActivity
         {
             if (mEmployee != null)
             {
+                if (!validate())
+                {
+                    return;
+                }
+
                 mEmployee.setAccountType(selectedAccountType);
                 mEmployee.setWorkExperience(selectedWorkExperience);
                 mEmployee.setEmployeeNo(edtEmployeeNo.getText().toString().trim());
@@ -160,6 +165,50 @@ public class EmployeeInfoActivity extends BaseActivity
         catch (Exception e)
         {
             handleException(TAG, "exception while saving employee info", e);
+        }
+    }
+
+    private boolean validate()
+    {
+        try
+        {
+            if (edtEmployeeNo.getText() == null || edtEmployeeNo.getText().toString().trim().length() < 2)
+            {
+                showErrorDialog(EmployeeInfoActivity.this, getResources().getString(R.string.enter_emp_no));
+
+                return false;
+            }
+
+            if (edtEmployeeName.getText() == null || edtEmployeeName.getText().toString().trim().length() < 2)
+            {
+                showErrorDialog(EmployeeInfoActivity.this, getResources().getString(R.string.enter_emp_name));
+                return false;
+            }
+
+            if (edtDesignation.getText() == null || edtDesignation.getText().toString().trim().length() < 2)
+            {
+                showErrorDialog(EmployeeInfoActivity.this, getResources().getString(R.string.enter_designation));
+                return false;
+            }
+
+            if (selectedAccountType == null || selectedAccountType.isEmpty())
+            {
+                showErrorDialog(EmployeeInfoActivity.this, getResources().getString(R.string.select_account_type));
+                return false;
+            }
+
+            if (selectedWorkExperience == null || selectedWorkExperience.length() <= 2)
+            {
+                showErrorDialog(EmployeeInfoActivity.this, getResources().getString(R.string.select_work_exp));
+                return false;
+            }
+
+            return false;
+        }
+        catch (Exception e)
+        {
+            handleException(TAG, "exception while validating fields", e);
+            return false;
         }
     }
 

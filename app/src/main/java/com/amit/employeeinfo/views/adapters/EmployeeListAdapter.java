@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,9 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amit.employeeinfo.R;
 import com.amit.employeeinfo.interfaces.OnEmployeeClickListener;
 import com.amit.employeeinfo.models.Employee;
-import com.amit.iv.CircularImageView;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 // Created by AMIT JANGID on 13/02/21.
@@ -57,8 +56,7 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
 
             if (employee.getEmpImage() != null)
             {
-                byte[] image = employee.getEmpImage().getBytes(StandardCharsets.UTF_8);
-                holder.ivEmpImage.setImageBitmap(BitmapFactory.decodeByteArray(image, 0, image.length));
+                holder.ivEmpImage.setImageBitmap(BitmapFactory.decodeByteArray(employee.getEmpImage(), 0, employee.getEmpImage().length));
             }
             else
             {
@@ -78,7 +76,7 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
     public static class EmployeeListViewHolder extends RecyclerView.ViewHolder
     {
         private final ConstraintLayout csEmployee;
-        private final CircularImageView ivEmpImage;
+        private final AppCompatImageView ivEmpImage;
         private final TextView tvEmployeeName, tvDesignation, tvWorkExperience;
 
         public EmployeeListViewHolder(@NonNull View itemView)

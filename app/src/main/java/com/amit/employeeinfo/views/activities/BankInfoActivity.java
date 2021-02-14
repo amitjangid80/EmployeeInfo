@@ -22,7 +22,6 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -32,6 +31,7 @@ import butterknife.ButterKnife;
 public class BankInfoActivity extends BaseActivity
 {
     private static final String TAG = BankInfoActivity.class.getSimpleName();
+    private static final int IMAGE_REQUEST_CODE = 561;
 
     @BindView(R.id.edtBankName)
     public TextInputEditText edtBankName;
@@ -50,7 +50,8 @@ public class BankInfoActivity extends BaseActivity
 
     private int code;
     private Employee mEmployee;
-    private String selectedBranchName, selectedImage;
+    private byte[] selectedImage;
+    private String selectedBranchName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -129,7 +130,13 @@ public class BankInfoActivity extends BaseActivity
 
     public void captureEmpImage(View view)
     {
-        ImagePicker.Companion.with(BankInfoActivity.this).cameraOnly().start();
+        ImagePicker.Companion
+                .with(BankInfoActivity.this)
+                .compress(200)
+                .crop(200, 200)
+                .cropSquare()
+                .cameraOnly()
+                .start(IMAGE_REQUEST_CODE);
     }
 
     public void saveBankInfo(View view)
@@ -138,6 +145,11 @@ public class BankInfoActivity extends BaseActivity
         {
             if (mEmployee != null)
             {
+                if (!validate())
+                {
+                    return;
+                }
+
                 mEmployee.setEmpImage(selectedImage);
                 mEmployee.setBranchName(selectedBranchName);
                 mEmployee.setBankName(edtBankName.getText().toString().trim());
@@ -163,6 +175,44 @@ public class BankInfoActivity extends BaseActivity
         }
     }
 
+    private boolean validate()
+    {
+        try
+        {
+            if (edtBankName.getText() == null || edtBankName.getText().toString().trim().length() < 2)
+            {
+                showErrorDialog(BankInfoActivity.this, getResources().getString(R.string.enter_bank_name));
+
+                return false;
+            }
+
+            if (selectedBranchName == null || selectedBranchName.length() < 2)
+            {
+                showErrorDialog(BankInfoActivity.this, getResources().getString(R.string.select_branch_name));
+                return false;
+            }
+
+            if (edtAccountNo.getText() == null || edtAccountNo.getText().toString().trim().length() < 2)
+            {
+                showErrorDialog(BankInfoActivity.this, getResources().getString(R.string.enter_account_no));
+                return false;
+            }
+
+            if (edtIFSCCode.getText() == null || edtIFSCCode.getText().toString().trim().length() < 6)
+            {
+                showErrorDialog(BankInfoActivity.this, getResources().getString(R.string.enter_ifsc_code));
+                return false;
+            }
+
+            return false;
+        }
+        catch (Exception e)
+        {
+            handleException(TAG, "exception while validating fields", e);
+            return false;
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
     {
@@ -170,7 +220,7 @@ public class BankInfoActivity extends BaseActivity
 
         try
         {
-            if (resultCode == Activity.RESULT_OK)
+            if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_REQUEST_CODE)
             {
                 if (data != null && data.getData() != null)
                 {
@@ -188,8 +238,7 @@ public class BankInfoActivity extends BaseActivity
                         byteArrayOutputStream.write(buffer, 0, length);
                     }
 
-                    byte[] imageArray = byteArrayOutputStream.toByteArray();
-                    selectedImage = new String(imageArray, StandardCharsets.UTF_8);
+                    selectedImage = byteArrayOutputStream.toByteArray();
                 }
             }
         }

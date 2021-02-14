@@ -152,6 +152,11 @@ public class PersonalInfoActivity extends BaseActivity
     {
         try
         {
+            if (!validate())
+            {
+                return;
+            }
+
             int gender;
 
             if (rbMale.isChecked())
@@ -193,6 +198,50 @@ public class PersonalInfoActivity extends BaseActivity
         catch (Exception e)
         {
             handleException(TAG, "exception while saving personal info in database", e);
+        }
+    }
+
+    private boolean validate()
+    {
+        try
+        {
+            if (edtFirstName.getText() == null || edtFirstName.getText().toString().trim().length() < 2)
+            {
+                showErrorDialog(PersonalInfoActivity.this, getResources().getString(R.string.enter_first_name));
+
+                return false;
+            }
+
+            if (edtLastName.getText() == null || edtLastName.getText().toString().trim().length() < 2)
+            {
+                showErrorDialog(PersonalInfoActivity.this, getResources().getString(R.string.enter_last_name));
+                return false;
+            }
+
+            if (edtPhoneNo.getText() == null || edtPhoneNo.getText().toString().trim().length() < 2)
+            {
+                showErrorDialog(PersonalInfoActivity.this, getResources().getString(R.string.enter_phone_no));
+                return false;
+            }
+
+            if (!rbMale.isChecked() || !rbFemale.isChecked() || !rbOther.isChecked())
+            {
+                showErrorDialog(PersonalInfoActivity.this, getResources().getString(R.string.select_gender));
+                return false;
+            }
+
+            if (selectedDOB == null || selectedDOB.length() <= 10)
+            {
+                showErrorDialog(PersonalInfoActivity.this, getResources().getString(R.string.select_dob));
+                return false;
+            }
+
+            return false;
+        }
+        catch (Exception e)
+        {
+            handleException(TAG, "exception while validating fields", e);
+            return false;
         }
     }
 

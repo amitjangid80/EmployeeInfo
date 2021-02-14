@@ -63,10 +63,13 @@ public class LocalDbHelper
                     employee.setBankName(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_BANK_NAME)));
                     employee.setIfscCode(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_IFSC_CODE)));
                     employee.setAccountNo(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_ACCOUNT_NO)));
+                    employee.setEmpImage(cursor.getBlob(cursor.getColumnIndex(Constants.COLUMN_EMP_IMAGE)));
 
                     employeesArrayList.add(employee);
                     cursor.moveToNext();
                 }
+
+                cursor.close();
             }
 
             return employeesArrayList;
@@ -97,7 +100,7 @@ public class LocalDbHelper
                     .addDataForTable(new DbData(Constants.COLUMN_BRANCH_NAME, TextUtils.replaceNullWithEmpty(employee.getBranchName())))
                     .addDataForTable(new DbData(Constants.COLUMN_ACCOUNT_NO, TextUtils.replaceNullWithEmpty(employee.getAccountNo())))
                     .addDataForTable(new DbData(Constants.COLUMN_IFSC_CODE, TextUtils.replaceNullWithEmpty(employee.getIfscCode())))
-                    .addDataForTable(new DbData(Constants.COLUMN_EMP_IMAGE, TextUtils.replaceNullWithEmpty(employee.getEmpImage())));
+                    .addDataForTable(new DbData(Constants.COLUMN_EMP_IMAGE, employee.getEmpImage()));
 
             if (isUpdate)
             {
